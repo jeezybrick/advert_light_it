@@ -1,3 +1,20 @@
-<p>
-  products-list works!
-</p>
+<ng-container *ngIf="!isProductsListLoading; else products_loading">
+
+<div class="product-list-wrap">
+  <div class="product-item-wrap" *ngFor="let product of products">
+    <app-product-item [product]="product"></app-product-item>
+
+    <!--<div class="qq">
+      <img [src]="product.images[0]?.file || '/assets/images/products/default-item-image.png'" [alt]="product.theme">
+    </div>-->
+
+   <!--,div class=""> {{ product.theme }}</div>-->
+  </div>
+</div>
+
+</ng-container>
+
+<ng-template #products_loading>
+  <p class="text-center">Loading...</p>
+</ng-template>
+

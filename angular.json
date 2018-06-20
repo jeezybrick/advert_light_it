@@ -123,5 +123,10 @@
       }
     }
   },
-  "defaultProject": "advert-light-it"
+  "defaultProject": "advert-light-it",
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "scss"
+    }
+  }
 }

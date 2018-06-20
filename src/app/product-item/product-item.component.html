@@ -1,0 +1,20 @@
+<div class="card">
+
+  <div class="product-image-wrap">
+    <img [src]="product.images[0]?.file || '/assets/images/products/default-item-image.png'" [alt]="product.theme">
+  </div>
+
+
+  <div class="bottom-sheet">
+
+    <div class="title-wrap">
+      {{product.theme}}
+    </div>
+
+    <a [routerLink]="[ '/products_list' , product.pk]" class="preview-icon-wrap">
+      <img src="/assets/images/products/fa-eye.png" alt="More detail">
+    </a>
+
+  </div>
+
+</div>

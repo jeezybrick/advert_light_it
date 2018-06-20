@@ -1,0 +1,17 @@
+.header-wrap {
+  display: flex;
+  align-items: center;
+
+  .logo-wrap {
+    flex-grow: 1;
+  }
+
+  .search-input-wrap {
+    flex-grow: 2;
+  }
+
+  .user-area-wrap {
+    flex-grow: 1;
+    text-align: right;
+  }
+}

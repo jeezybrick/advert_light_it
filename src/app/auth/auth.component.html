@@ -1,3 +1,22 @@
-<p>
-  auth works!
-</p>
+<div class="auth-page-wrap">
+
+  <div class="background-image"></div>
+
+  <div class="sidebar-wrap">
+
+  </div>
+
+</div>
+
+<a [routerLink]="[ '/' ]"
+         routerLinkActive="active">All</a>
+
+<a [routerLink]="[ 'sign_in' ]"
+         routerLinkActive="active">Sign in</a>
+
+<a [routerLink]="[ 'sign_up' ]"
+         routerLinkActive="active">Sign up</a>
+
+<router-outlet></router-outlet>
+
+<app-footer></app-footer>
