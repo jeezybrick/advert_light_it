@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { finalize } from 'rxjs/internal/operators';
 
-import { Product } from '../shared/models/product.model';
-import { ProductService } from '../shared/services/product/product.service';
+import { Product } from '../../shared/models/product.model';
+import { ProductService } from '../../shared/services/product/product.service';
+
 
 @Component({
   selector: 'app-products-list',
@@ -48,14 +49,12 @@ export class ProductsListComponent implements OnInit {
   }
 
   public onScroll(event: Event): void {
-    console.log('scroll event', event);
 
     if (this.isProductsListLoading || this.pagination.finish) {
       return;
     }
 
     if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-      console.log('On Scroll Down');
       this.getProductsList();
     }
   }

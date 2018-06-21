@@ -21,6 +21,10 @@
     color: #FFFFFF;
 
     .title-wrap {
+      max-width: 85%;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
       font-weight: bold;
       font-size: 18px;
     }

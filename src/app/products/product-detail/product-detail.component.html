@@ -1,0 +1,50 @@
+
+<div class="product-detail-wrap">
+
+  <div class="product-images-wrap">
+    <div class="backdrop">
+      <button class="display-left" (click)="previousImage()" *ngIf="this.indexOfCurrentImage > 0">&#10094;</button>
+      <button class="display-right" (click)="nextImage()" *ngIf="indexOfCurrentImage !== product.images.length - 1">&#10095;</button>
+      <img [src]="slideImage.file || '/assets/images/products/default-item-image.png'" [alt]="product.theme">
+    </div>
+
+  </div>
+
+  <div class="product-info-wrap">
+    <p class="title">Some title text must be here maybe second line</p>
+
+    <div>
+      <b>from </b>
+     <span class="owner-name"><b>{{ product.owner.first_name }} {{ product.owner.last_name }} </b></span>
+      <span class="price"><b>{{ product.price }}$</b></span>
+    </div>
+
+    <p>Some description text from WYSIWYG editer</p>
+
+    <p>Can be <b>BOLD </b> <i>Italic</i></p>
+
+    <div>
+      <b>Can have list:</b>
+
+      <ul class="dashed-list">
+        <li>
+          <b>first</b>
+        </li>
+        <li>
+          <b>second</b>
+        </li>
+      </ul>
+    </div>
+    <p>And anything from WYSIWYG editor</p>
+
+    <p>
+      <b> Some line</b> <br>
+      Some line<br>
+      <i>Some line</i>
+    </p>
+
+    <p><b>Finished on this line.</b></p>
+
+  </div>
+
+</div>

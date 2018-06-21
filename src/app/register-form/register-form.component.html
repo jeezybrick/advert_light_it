@@ -1,3 +1,33 @@
-<p>
-  register-form works!
-</p>
+<form class="auth-form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+
+  <div class="form-group">
+    <label class="center-block">
+      <input type="text" class="form-control" formControlName="username" placeholder="Username">
+    </label>
+  </div>
+
+  <div class="form-group">
+    <label class="center-block">
+      <input type="email" class="form-control" formControlName="email" placeholder="Email">
+    </label>
+  </div>
+
+  <div class="form-group">
+    <label class="center-block">
+      <input type="password" class="form-control" formControlName="password1" placeholder="Password">
+    </label>
+  </div>
+
+  <div class="form-group">
+    <label class="center-block">
+      <input type="password" class="form-control" formControlName="password2" placeholder="Confirm password">
+    </label>
+  </div>
+
+  <div class="form-action-wrap">
+    <button type="submit" class="action-button" [disabled]="registerForm.invalid || isRegisterProcess">Register</button>
+  </div>
+
+  <app-main-preloader *ngIf="isRegisterProcess"></app-main-preloader>
+
+</form>

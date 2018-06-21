@@ -1,3 +1,21 @@
-<p>
-  login-form works!
-</p>
+<form class="auth-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+  <div class="form-group">
+    <label class="center-block">
+      <input type="email" class="form-control" formControlName="email" placeholder="Email">
+    </label>
+  </div>
+
+  <div class="form-group">
+    <label class="center-block">
+      <input type="password" class="form-control" formControlName="password" placeholder="Password">
+    </label>
+  </div>
+
+  <div class="form-action-wrap">
+    <button type="submit" class="action-button" [disabled]="loginForm.invalid || isLoginProcess">Login</button>
+  </div>
+
+  <app-main-preloader *ngIf="isLoginProcess"></app-main-preloader>
+
+</form>

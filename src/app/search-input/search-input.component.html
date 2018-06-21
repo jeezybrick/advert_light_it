@@ -1,11 +1,19 @@
 <div class="search-input-wrap">
-  <input type="text" (keyup)="search($event.target.value)" placeholder="Try to find something"/>
+  <input type="text" (keyup)="search()" [(ngModel)]="searchText" placeholder="Try to find something"/>
   <div class="search-input-dropdown">
 
-    <a *ngFor="let product of products$ | async"
-       [routerLink]="[ '/products_list' , product.pk]" (click)="resetSearchResults()">
-      {{ product.theme }}
+    <a class="product-link" *ngFor="let product of products$ | async"
+       [routerLink]="[ '/products' , product.pk]" (click)="resetSearchResults()">
+
+      <div class="image-product-preview">
+        <img [src]="product.images[0]?.file || '/assets/images/products/default-item-image.png'" [alt]="product.theme">
+      </div>
+
+      <span class="product-theme">{{ product.theme }}</span>
+
     </a>
+
+    <!--<p *ngIf="products$ && !products$.length">No results :(</p>-->
 
   </div>
 </div>

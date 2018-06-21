@@ -20,7 +20,7 @@
     top: 0;
     height: 100vh;
     width: 300px;
-    padding: 5em 0.5em;
+    padding: 5em 1.5em;
     background-color: #00b3be;
 
     @media (max-width: 480px) {
@@ -37,26 +37,26 @@
     .auth-buttons-wrap {
       display: flex;
       align-items: center;
-      justify-content: space-around;
+      justify-content: space-between;
       margin-bottom: 2em;
 
       .auth-button {
-        background-color: #f2f2f2;
+        position: relative;
         padding: .6em 2em;
+        background-color: #f2f2f2;
         text-decoration: none;
         color: #4a4a4a;
         font-weight: 400;
 
         &.active {
+          top: 2px;
           border-bottom: 3px solid #91d763;
         }
       }
     }
 
     .auth-form-wrap {
-      display: flex;
-      align-items: center;
-      justify-content: center;
+
     }
   }
 

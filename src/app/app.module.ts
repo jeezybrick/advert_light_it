@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { ProductsListComponent } from './products-list/products-list.component';
 import { AuthComponent } from './auth/auth.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { HeaderComponent } from './header/header.component';
@@ -13,18 +12,16 @@ import { LoginFormComponent } from './login-form/login-form.component';
 import { RegisterFormComponent } from './register-form/register-form.component';
 import { SearchInputComponent } from './search-input/search-input.component';
 import { UserAreaComponent } from './user-area/user-area.component';
-import { ProductItemComponent } from './product-item/product-item.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ProductDetailComponent } from './product-detail/product-detail.component';
-import { MainPreloaderComponent } from './main-preloader/main-preloader.component';
 import { ShellComponent } from './shell/shell.component';
 import { ProgressBarComponent } from './progress-bar/progress-bar.component';
+import { SharedModule } from './shared/shared.module';
+import { TokenInterceptor } from './shared/auth/token.interceptor';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ProductsListComponent,
     AuthComponent,
     PageNotFoundComponent,
     HeaderComponent,
@@ -34,9 +31,6 @@ import { ProgressBarComponent } from './progress-bar/progress-bar.component';
     RegisterFormComponent,
     SearchInputComponent,
     UserAreaComponent,
-    ProductItemComponent,
-    ProductDetailComponent,
-    MainPreloaderComponent,
     ShellComponent,
     ProgressBarComponent
   ],
@@ -45,14 +39,15 @@ import { ProgressBarComponent } from './progress-bar/progress-bar.component';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    SharedModule
   ],
   providers: [
-    // {
-    //   provide: HTTP_INTERCEPTORS,
-    //   useClass: TokenInterceptor,
-    //   multi: true
-    // }
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

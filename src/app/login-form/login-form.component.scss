@@ -1,0 +1,62 @@
+.auth-form {
+
+  input {
+    width: 100%;
+    padding: .5em 1em;
+    color: #FFFFFF;
+    border: none;
+    border-bottom: 3px solid #FFFFFF;
+    margin: .6em 0;
+    background-color: transparent !important;
+
+    &::placeholder {
+      color: #FFFFFF;
+      opacity: 1;
+    }
+
+    &:-ms-input-placeholder {
+      color: #FFFFFF;
+    }
+
+    &:focus {
+      outline: none;
+
+      &::placeholder {
+        color: transparent;
+      }
+
+      &:-ms-input-placeholder {
+        color: transparent;
+      }
+    }
+  }
+
+  /* For chrome autofill */
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
+  }
+
+  /* Change text in autofill textbox */
+  input:-webkit-autofill {
+    -webkit-text-fill-color: #FFFFFF;
+  }
+
+  .action-button {
+    width: 100%;
+    padding: .8em;
+    margin: 2em 0;
+    background-color: #f2f2f2;
+    color: #4a4a4a;
+    outline: none;
+    border: none;
+    cursor: pointer;
+
+    &:disabled {
+      cursor: not-allowed;
+    }
+
+  }
+}

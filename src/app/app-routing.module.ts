@@ -1,14 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { ProductsListComponent } from './products-list/products-list.component';
 import { AuthComponent } from './auth/auth.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { RegisterFormComponent } from './register-form/register-form.component';
-import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { ShellComponent } from './shell/shell.component';
-import { ProductResolver } from './product-detail/product.resolver';
+import { NoAuthGuard } from './shared/auth/no-auth-guard.service';
+import { AuthGuard } from './shared/auth/auth-guard.service';
 
 const routes: Routes = [
 
@@ -16,17 +15,16 @@ const routes: Routes = [
     path: '',
     component: ShellComponent,
     children: [
-      {path: '', redirectTo: 'products_list', pathMatch: 'full'},
-      {path: 'products_list', component: ProductsListComponent},
+       {path: '', redirectTo: 'products', pathMatch: 'full'},
       {
-        path: 'products_list/:id',
-        component: ProductDetailComponent,
-        resolve: {product: ProductResolver}
-      },
+        path: 'products',
+        loadChildren: './products/products.module#ProductsModule'
+      }
     ]
   },
   {
     path: 'auth',
+    canActivate: [NoAuthGuard],
     component: AuthComponent,
     children: [
       {path: '', redirectTo: 'sign_in', pathMatch: 'full'},
@@ -44,7 +42,10 @@ const routes: Routes = [
       enableTracing: false
     })],
   exports: [RouterModule],
-  providers: []
+  providers: [
+    AuthGuard,
+    NoAuthGuard
+  ]
 })
 export class AppRoutingModule {
 }

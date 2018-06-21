@@ -13,6 +13,7 @@ export class SearchInputComponent implements OnInit {
 
   private searchText$ = new Subject<string>();
   public products$: Observable<Product[]>;
+  public searchText: string;
 
   constructor(private productService: ProductService) {
   }
@@ -23,7 +24,6 @@ export class SearchInputComponent implements OnInit {
       debounceTime(500),
       distinctUntilChanged(),
       switchMap((productTheme) => {
-        console.log(productTheme);
         return this.productService.getProductsList({theme: productTheme});
         }
       )
@@ -31,13 +31,13 @@ export class SearchInputComponent implements OnInit {
 
   }
 
-  public search(productTheme: string): void {
-    console.log(productTheme);
-    this.searchText$.next(productTheme);
+  public search(): void {
+    this.searchText$.next(this.searchText);
   }
 
   public resetSearchResults(): void {
     this.products$ = null;
+    this.searchText = '';
   }
 
 }

@@ -1,7 +1,13 @@
 import { Injectable } from '@angular/core';
 
 import { BehaviorSubject, Observable } from 'rxjs';
-import { HttpRequest } from '@angular/common/http';
+import { HttpClient, HttpRequest } from '@angular/common/http';
+import { User } from '../models/user.model';
+import { UserService } from '../services/user/user.service';
+import { map } from 'rxjs/internal/operators';
+import { AuthUser } from '../models/created-user.model';
+
+const base_url = 'http://light-it-04.tk/api';
 
 @Injectable({
   providedIn: 'root'
@@ -10,14 +16,48 @@ export class AuthService {
 
   public isLoginSubject = new BehaviorSubject<boolean>(this.hasToken());
   public cachedRequests: Array<HttpRequest<any>> = [];
+  public currentUser: AuthUser;
 
-  public login() {
-    localStorage.setItem('token', 'JWT');
-    this.isLoginSubject.next(true);
+  constructor(private userService: UserService,
+              private http: HttpClient) {
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
   }
 
+  public register(user: User): Observable<any> {
+
+    return this.userService.create(user)
+      .pipe(
+        map((userData: AuthUser) => {
+          return this.setUserDataToLocalStorage(userData);
+        })
+      );
+
+  }
+
+  public login(user): Observable<any> {
+
+    return this.http.post<any>(`${base_url}/login/`, user)
+      .pipe(
+        map((userData: AuthUser) => {
+          return this.setUserDataToLocalStorage(userData);
+        })
+      );
+  }
+
+  private setUserDataToLocalStorage(userData): AuthUser {
+
+    if (userData && userData.token) {
+      this.currentUser = userData;
+      localStorage.setItem('currentUser', JSON.stringify(userData));
+      this.isLoginSubject.next(true);
+    }
+
+    return userData;
+  }
+
+
   public logout(): void {
-    localStorage.removeItem('token');
+    localStorage.removeItem('currentUser');
     this.isLoginSubject.next(false);
   }
 
@@ -26,11 +66,11 @@ export class AuthService {
   }
 
   public hasToken(): boolean {
-    return !!localStorage.getItem('token');
+    return !!localStorage.getItem('currentUser');
   }
 
   public getToken(): string {
-    return localStorage.getItem('token');
+    return localStorage.getItem('currentUser');
   }
 
   public collectFailedRequest(request): void {

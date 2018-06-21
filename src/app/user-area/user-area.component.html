@@ -1,7 +1,11 @@
 <div class="user-area-block">
 
-  <div class="no-auth-block">
+  <div class="no-auth-block" *ngIf="!(isLoggedIn | async)">
     <p>Welcome, <a [routerLink]="['/auth/sign_in']">login</a> or <a [routerLink]="['/auth/sign_up']">register</a> for start</p>
+  </div>
+
+  <div class="auth-block" *ngIf="(isLoggedIn | async)">
+    Hello, {{ currentUser.user.username || 'Jack' }}! <a href="javascript:;" (click)="logout()">Logout</a>
   </div>
 
 </div>
