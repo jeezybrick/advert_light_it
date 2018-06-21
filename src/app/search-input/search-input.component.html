@@ -1,3 +1,11 @@
-<p>
-  search-input works!
-</p>
+<div class="search-input-wrap">
+  <input type="text" (keyup)="search($event.target.value)" placeholder="Try to find something"/>
+  <div class="search-input-dropdown">
+
+    <a *ngFor="let product of products$ | async"
+       [routerLink]="[ '/products_list' , product.pk]" (click)="resetSearchResults()">
+      {{ product.theme }}
+    </a>
+
+  </div>
+</div>

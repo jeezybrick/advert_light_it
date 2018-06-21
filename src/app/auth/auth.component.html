@@ -4,19 +4,25 @@
 
   <div class="sidebar-wrap">
 
+    <a class="logo-wrap" [routerLink]="['/']">
+       <img src="/assets/images/auth/sell-it.png" alt="Logo">
+    </a>
+
+    <div class="auth-buttons-wrap">
+      <a class="auth-button" [routerLink]="['/auth/sign_in']" routerLinkActive="active">Sign In</a>
+      <a class="auth-button" [routerLink]="['/auth/sign_up']" routerLinkActive="active">Sign Up</a>
+    </div>
+
+    <div class="auth-form-wrap">
+      <router-outlet></router-outlet>
+    </div>
+
+
   </div>
+
+  <app-footer></app-footer>
 
 </div>
 
-<a [routerLink]="[ '/' ]"
-         routerLinkActive="active">All</a>
 
-<a [routerLink]="[ 'sign_in' ]"
-         routerLinkActive="active">Sign in</a>
 
-<a [routerLink]="[ 'sign_up' ]"
-         routerLinkActive="active">Sign up</a>
-
-<router-outlet></router-outlet>
-
-<app-footer></app-footer>

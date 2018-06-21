@@ -1,0 +1,18 @@
+.footer-wrap {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60px;
+  background-color: #00b3be;
+
+  .main-text {
+    color: #ffffff;
+    font-family: "Arial - Bold MT";
+    font-size: 18px;
+    font-weight: bold;
+  }
+}

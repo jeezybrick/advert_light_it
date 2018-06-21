@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { catchError } from 'rxjs/internal/operators';
 
@@ -7,12 +7,6 @@ import { Product } from '../../models/product.model';
 
 const url = 'http://light-it-04.tk/api';
 
-/*const params = new HttpParams({
-      fromObject: {
-        param1: 'value1',
-        param2: 'value2',
-      }
-    });*/
 
 @Injectable({
   providedIn: 'root'
@@ -21,11 +15,27 @@ export class ProductService {
 
   constructor(private http: HttpClient) { }
 
-  public getProductsList(): Observable<any> {
-    return this.http.get<Product[]>(`${url}/adverts/`)
+  public getProductsList(params = {}): Observable<any> {
+
+    const settingQueryParams = this.setQueryParams(params);
+
+    return this.http.get<Product[]>(`${url}/adverts/`, {params: settingQueryParams})
       .pipe(
         catchError(this.handleError<any>('updateHero'))
       );
+  }
+
+  public getProductDetail(productId): Observable<any> {
+    return this.http.get<Product>(`${url}/adverts/${productId}/`);
+  }
+
+  private setQueryParams(params): HttpParams {
+
+    const localParams = new HttpParams({
+      fromObject: params
+    });
+
+    return localParams;
   }
 
   private handleError<T> (operation = 'operation', result?: T) {

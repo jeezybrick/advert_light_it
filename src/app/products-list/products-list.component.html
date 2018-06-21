@@ -1,20 +1,20 @@
-<ng-container *ngIf="!isProductsListLoading; else products_loading">
+<ng-container *ngIf="!isProductsListInitialLoading; else products_loading">
 
-<div class="product-list-wrap">
-  <div class="product-item-wrap" *ngFor="let product of products">
-    <app-product-item [product]="product"></app-product-item>
-
-    <!--<div class="qq">
-      <img [src]="product.images[0]?.file || '/assets/images/products/default-item-image.png'" [alt]="product.theme">
-    </div>-->
-
-   <!--,div class=""> {{ product.theme }}</div>-->
+  <div class="product-list-wrap" (window:scroll)="onScroll($event)">
+    <div class="product-item-wrap" *ngFor="let product of products">
+      <app-product-item [product]="product"></app-product-item>
+    </div>
   </div>
-</div>
+
+  <div class="default-preloader-wrap">
+    <app-main-preloader *ngIf="isProductsListLoading && !isProductsListInitialLoading"></app-main-preloader>
+  </div>
 
 </ng-container>
 
 <ng-template #products_loading>
-  <p class="text-center">Loading...</p>
+  <div class="initial-preloader-wrap">
+    <app-main-preloader></app-main-preloader>
+  </div>
 </ng-template>
 

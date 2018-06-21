@@ -1,0 +1,19 @@
+.user-area-block {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  padding: 0 2em;
+  background-color: #00b3be;
+
+  .no-auth-block {
+    font-weight: bold;
+    font-size: 18px;
+    color: #FFFFFF;
+
+    a {
+      color: #4a4a4a;
+      text-decoration: none;
+    }
+  }
+}

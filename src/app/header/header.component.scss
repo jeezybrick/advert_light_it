@@ -1,17 +1,17 @@
 .header-wrap {
   display: flex;
   align-items: center;
+  padding: 0 .3em;
 
   .logo-wrap {
-    flex-grow: 1;
+    flex-grow: 2;
   }
 
   .search-input-wrap {
-    flex-grow: 2;
+    flex-grow: 1;
   }
 
   .user-area-wrap {
     flex-grow: 1;
-    text-align: right;
   }
 }
