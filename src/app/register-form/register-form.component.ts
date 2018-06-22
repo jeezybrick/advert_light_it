@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../shared/services/user/user.service';
 import { finalize, first } from 'rxjs/internal/operators';
 import { AuthService } from '../shared/auth/auth.service';
+import { AuthError } from '../shared/models/auth-error.model';
 
 
 @Component({
@@ -16,6 +17,7 @@ export class RegisterFormComponent implements OnInit {
   private returnUrl: string;
   public registerForm: FormGroup;
   public isRegisterProcess = false;
+  public registerError: AuthError = new AuthError();
 
   constructor(private userService: UserService,
               private authService: AuthService,
@@ -50,18 +52,23 @@ export class RegisterFormComponent implements OnInit {
                 },
               (error) => {
                      console.log(error);
+                     this.registerError = error.error;
                 });
+  }
+
+  get f() {
+    return this.registerForm;
   }
 
   private createRegisterForm(): void {
 
     this.registerForm = this.fb.group({
-      username: [''],
+      username: ['', Validators.required],
       email: ['', [Validators.required,
         Validators.minLength(3),
         Validators.maxLength(256), Validators.email]],
-      password1: ['', [Validators.required, Validators.minLength(2)]],
-      password2: ['', [Validators.required, Validators.minLength(2)]]
+      password1: ['', [Validators.required, Validators.minLength(8)]],
+      password2: ['', [Validators.required, Validators.minLength(8)]]
     }, {validator: this.matchingPasswords('password1', 'password2')});
 
   }

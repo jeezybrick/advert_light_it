@@ -9,6 +9,10 @@
     margin: .6em 0;
     background-color: transparent !important;
 
+    &.is-invalid {
+      border-bottom: 3px solid #FF0000;
+    }
+
     &::placeholder {
       color: #FFFFFF;
       opacity: 1;
@@ -29,19 +33,21 @@
         color: transparent;
       }
     }
+
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover,
+    &:-webkit-autofill:focus,
+    &:-webkit-autofill:active {
+      transition: background-color 5000s ease-in-out 0s;
+    }
+
+    &:-webkit-autofill {
+      -webkit-text-fill-color: #FFFFFF;
+    }
   }
 
-  /* For chrome autofill */
-  input:-webkit-autofill,
-  input:-webkit-autofill:hover,
-  input:-webkit-autofill:focus,
-  input:-webkit-autofill:active {
-    transition: background-color 5000s ease-in-out 0s;
-  }
-
-  /* Change text in autofill textbox */
-  input:-webkit-autofill {
-    -webkit-text-fill-color: #FFFFFF;
+  .invalid-feedback {
+    color: #FF0000;
   }
 
   .action-button {

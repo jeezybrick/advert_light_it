@@ -14,8 +14,9 @@ const routes: Routes = [
   {
     path: '',
     component: ShellComponent,
+    data: { state: 'shell'},
     children: [
-       {path: '', redirectTo: 'products', pathMatch: 'full'},
+      {path: '', redirectTo: 'products', pathMatch: 'full'},
       {
         path: 'products',
         loadChildren: './products/products.module#ProductsModule'
@@ -26,6 +27,7 @@ const routes: Routes = [
     path: 'auth',
     canActivate: [NoAuthGuard],
     component: AuthComponent,
+    data: { state: 'auth'},
     children: [
       {path: '', redirectTo: 'sign_in', pathMatch: 'full'},
       {path: 'sign_in', component: LoginFormComponent},

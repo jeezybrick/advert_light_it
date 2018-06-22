@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subject, Subscription } from 'rxjs';
 import { Product } from '../shared/models/product.model';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/internal/operators';
 import { ProductService } from '../shared/services/product/product.service';
@@ -9,35 +9,48 @@ import { ProductService } from '../shared/services/product/product.service';
   templateUrl: './search-input.component.html',
   styleUrls: ['./search-input.component.scss']
 })
-export class SearchInputComponent implements OnInit {
+export class SearchInputComponent implements OnInit, OnDestroy {
 
   private searchText$ = new Subject<string>();
-  public products$: Observable<Product[]>;
-  public searchText: string;
+  public products: Product[] = [];
+  public searchText = '';
+  public isProductsLoading = true;
+  private subscriptions: Subscription[] = [];
 
   constructor(private productService: ProductService) {
   }
 
   public ngOnInit() {
 
-    this.products$ = this.searchText$.pipe(
+    this.subscriptions.push(this.searchText$.pipe(
       debounceTime(500),
-      distinctUntilChanged(),
+      // distinctUntilChanged(),
       switchMap((productTheme) => {
-        return this.productService.getProductsList({theme: productTheme});
+          return this.productService.getProductsList({theme: productTheme});
         }
       )
-    );
+    ).subscribe((data: Product[]) => {
+      this.products = data;
+      this.isProductsLoading = false;
+    }));
 
   }
 
+  public ngOnDestroy(): void {
+
+    this.subscriptions.forEach((subscription: Subscription) => {
+      subscription.unsubscribe();
+    });
+  }
+
   public search(): void {
+    this.isProductsLoading = true;
     this.searchText$.next(this.searchText);
   }
 
   public resetSearchResults(): void {
-    this.products$ = null;
     this.searchText = '';
+    this.products = [];
   }
 
 }

@@ -1,13 +1,12 @@
 
 .progress {
-  position: relative;
+  position: absolute;
   height: 4px;
   display: block;
   width: 100%;
   background-color: #acece6;
   border-radius: 2px;
   background-clip: padding-box;
-  margin: 0 0 1rem 0;
   overflow: hidden;
 
   .determinate {

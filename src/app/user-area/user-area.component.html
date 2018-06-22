@@ -5,7 +5,31 @@
   </div>
 
   <div class="auth-block" *ngIf="(isLoggedIn | async)">
-    Hello, {{ currentUser.user.username || 'Jack' }}! <a href="javascript:;" (click)="logout()">Logout</a>
+
+    <div class="main-menu">
+
+      <div class="avatar-wrap">
+        <img [src]="currentUser.user.avatar || '/assets/images/user/default_avatar.png'" alt="User avatar">
+      </div>
+
+      <span>{{ userFullName }}</span>
+
+    </div>
+
+    <div class="sub-menu">
+
+      <div class="add-new-post-block">
+        <a [routerLink]="['/products/add']">Add new post</a>
+      </div>
+
+      <span class="divider"></span>
+
+      <div class="profile-block">
+        <a href="javascript:;" (click)="logout()">Logout</a>
+      </div>
+
+    </div>
+
   </div>
 
 </div>

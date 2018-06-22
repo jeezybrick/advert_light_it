@@ -21,7 +21,7 @@
     color: #FFFFFF;
 
     .title-wrap {
-      max-width: 85%;
+      max-width: 75%;
       text-overflow: ellipsis;
       white-space: nowrap;
       overflow: hidden;
@@ -29,9 +29,26 @@
       font-size: 18px;
     }
 
-    .preview-icon-wrap {
-      cursor: pointer;
+    .user-action-wrap {
+      display: flex;
+      align-items: center;
+
+      > i {
+        margin-right: .3em;
+      }
+
+      i {
+        position: relative;
+        cursor: pointer;
+        color: #FFFFFF;
+
+        &:hover {
+          top: 2px;
+        }
+
+      }
     }
+
   }
 
 }

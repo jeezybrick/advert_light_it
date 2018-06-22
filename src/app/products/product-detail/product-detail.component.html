@@ -3,8 +3,8 @@
 
   <div class="product-images-wrap">
     <div class="backdrop">
-      <button class="display-left" (click)="previousImage()" *ngIf="this.indexOfCurrentImage > 0">&#10094;</button>
-      <button class="display-right" (click)="nextImage()" *ngIf="indexOfCurrentImage !== product.images.length - 1">&#10095;</button>
+      <button class="display-left" (click)="previousImage()" *ngIf="product.images.length && this.indexOfCurrentImage > 0">&#10094;</button>
+      <button class="display-right" (click)="nextImage()" *ngIf="product.images.length && indexOfCurrentImage !== product.images.length - 1">&#10095;</button>
       <img [src]="slideImage.file || '/assets/images/products/default-item-image.png'" [alt]="product.theme">
     </div>
 

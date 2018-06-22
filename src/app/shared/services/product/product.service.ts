@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable, of, throwError } from 'rxjs';
-import { catchError } from 'rxjs/internal/operators';
+import { Observable } from 'rxjs';
 
 import { Product } from '../../models/product.model';
 
@@ -17,19 +16,16 @@ export class ProductService {
 
   public getProductsList(params = {}): Observable<any> {
 
-    const settingQueryParams = this.setQueryParams(params);
+    const settingQueryParams = ProductService.setQueryParams(params);
 
-    return this.http.get<Product[]>(`${url}/adverts/`, {params: settingQueryParams})
-      .pipe(
-        catchError(this.handleError<any>('updateHero'))
-      );
+    return this.http.get<Product[]>(`${url}/adverts/`, {params: settingQueryParams});
   }
 
   public getProductDetail(productId): Observable<any> {
     return this.http.get<Product>(`${url}/adverts/${productId}/`);
   }
 
-  private setQueryParams(params): HttpParams {
+  private static setQueryParams(params): HttpParams {
 
     const localParams = new HttpParams({
       fromObject: params
@@ -38,19 +34,17 @@ export class ProductService {
     return localParams;
   }
 
-  private handleError<T> (operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
+  public addToCart(productId): Observable<any> {
 
-      // TODO: send the error to remote logging infrastructure
-      console.error(error); // log to console instead
-
-      // TODO: better job of transforming error for user consumption
-      this.log(`${operation} failed: ${error.message}`);
-
-      // Let the app keep running by returning an empty result.
-      return of(result as T);
+    const data = {
+      basket: 1,
+      product: productId,
+      count: 1
     };
+
+    return this.http.post<any>(`${url}/add_to_basket/`, data);
   }
+
 
   private log(message: string) {
     // this.messageService.add('HeroService: ' + message);

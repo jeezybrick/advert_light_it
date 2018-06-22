@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { finalize, first } from 'rxjs/internal/operators';
 import { AuthService } from '../shared/auth/auth.service';
+import { AuthError } from '../shared/models/auth-error.model';
 
 @Component({
   selector: 'app-login-form',
@@ -14,7 +15,7 @@ export class LoginFormComponent implements OnInit {
   private returnUrl: string;
   public loginForm: FormGroup;
   public isLoginProcess = false;
-
+  public loginError: AuthError = new AuthError();
 
   constructor(private fb: FormBuilder,
               private route: ActivatedRoute,
@@ -25,10 +26,7 @@ export class LoginFormComponent implements OnInit {
 
   ngOnInit() {
 
-    // reset login status
     this.authService.logout();
-
-    // get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
 
   }
@@ -39,14 +37,19 @@ export class LoginFormComponent implements OnInit {
       email: ['', [Validators.required,
         Validators.minLength(3),
         Validators.maxLength(256), Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(2)]]
+      password: ['', [Validators.required, Validators.minLength(8)]]
     });
 
+  }
+
+  get f() {
+    return this.loginForm;
   }
 
   public onSubmit(): void {
 
     this.isLoginProcess = true;
+    this.loginError = null;
 
     this.authService.login(this.loginForm.value)
       .pipe(
@@ -56,11 +59,10 @@ export class LoginFormComponent implements OnInit {
         }))
       .subscribe(
         (data) => {
-          console.log(data);
           this.router.navigate([this.returnUrl]);
         },
         (error) => {
-          console.log(error);
+          this.loginError = error.error;
         });
   }
 }

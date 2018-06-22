@@ -1,14 +1,16 @@
 import { Component } from '@angular/core';
 import { Router, Event, NavigationStart, NavigationEnd, NavigationError, NavigationCancel } from '@angular/router';
+import { routerTransition } from './app-router.animations';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
+  animations: [ routerTransition ],
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
 
-  loading = true;
+  public loading = true;
 
   constructor(private router: Router) {
     router.events.subscribe((routerEvent: Event) => {
@@ -16,7 +18,7 @@ export class AppComponent {
     });
   }
 
-  checkRouterEvent(routerEvent: Event): void {
+  public checkRouterEvent(routerEvent: Event): void {
     if (routerEvent instanceof NavigationStart) {
       this.loading = true;
     }
@@ -26,5 +28,9 @@ export class AppComponent {
       routerEvent instanceof NavigationError) {
       this.loading = false;
     }
+  }
+
+  public getState(outlet) {
+    return outlet.activatedRouteData.state;
   }
 }

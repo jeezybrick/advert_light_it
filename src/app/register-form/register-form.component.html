@@ -1,27 +1,99 @@
 <form class="auth-form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
 
   <div class="form-group">
+
     <label class="center-block">
-      <input type="text" class="form-control" formControlName="username" placeholder="Username">
+      <input type="text"
+             class="form-control"
+             formControlName="username"
+             placeholder="Username"
+             [class.is-invalid]="(f.get('email').hasError('required') && f.get('email').touched) || registerError?.username">
     </label>
+
+    <div class="invalid-feedback" *ngIf="registerError">
+      <p *ngFor="let error of registerError.username">{{ error }}</p>
+    </div>
+
+    <div class="invalid-feedback" *ngIf="f.get('username').hasError('required') && f.get('username').touched">
+      Please type username.
+    </div>
+
   </div>
 
   <div class="form-group">
+
     <label class="center-block">
-      <input type="email" class="form-control" formControlName="email" placeholder="Email">
+      <input type="email"
+             class="form-control"
+             formControlName="email"
+             placeholder="Email"
+             [class.is-invalid]="(f.get('email').hasError('required') && f.get('email').touched) || registerError.email">
     </label>
+
+     <div class="invalid-feedback" *ngIf="registerError">
+      <p *ngFor="let error of registerError.email">{{ error }}</p>
+    </div>
+
+    <div class="invalid-feedback" *ngIf="f.get('email').hasError('required') && f.get('email').touched">
+      Please type email.
+    </div>
+
   </div>
 
   <div class="form-group">
+
     <label class="center-block">
-      <input type="password" class="form-control" formControlName="password1" placeholder="Password">
+      <input type="password"
+             class="form-control"
+             formControlName="password1"
+             placeholder="Password"
+             [class.is-invalid]="((f.get('password1').hasError('required') || f.get('password1').hasError('minlength')) && f.get('password1').touched) || registerError.password1">
     </label>
+
+    <div class="invalid-feedback" *ngIf="registerError">
+      <p *ngFor="let error of registerError.password1">{{ error }}</p>
+    </div>
+
+    <div class="invalid-feedback" *ngIf="f.get('password1').hasError('required') && f.get('password1').touched">
+      Please type password.
+    </div>
+
+    <div class="invalid-feedback" *ngIf="f.get('password1').hasError('minlength') && f.get('password1').touched">
+      Password must contain at least 8 characters
+    </div>
+
   </div>
 
   <div class="form-group">
+
     <label class="center-block">
-      <input type="password" class="form-control" formControlName="password2" placeholder="Confirm password">
+      <input type="password"
+             class="form-control"
+             formControlName="password2"
+             placeholder="Confirm password"
+             [class.is-invalid]="((f.get('password2').hasError('required') || f.get('password2').hasError('minlength') )&& f.get('password2').touched) || registerError.password2">
     </label>
+
+    <div class="invalid-feedback" *ngIf="registerError">
+      <p *ngFor="let error of registerError.password2">{{ error }}</p>
+    </div>
+
+    <div class="invalid-feedback" *ngIf="f.get('password2').hasError('required') && f.get('password2').touched">
+      Please type confirm password.
+    </div>
+
+    <div class="invalid-feedback" *ngIf="f.get('password2').hasError('minlength') && f.get('password2').touched">
+      Password must contain at least 8 characters
+    </div>
+
+  </div>
+
+  <div class="invalid-feedback" *ngIf="f.get('password1').touched && f.get('password2').touched && f.hasError('mismatchedPasswords')">
+    Passwords do not match. Please check it out.
+  </div>
+
+  <div class="invalid-feedback" *ngIf="registerError">
+    <p *ngFor="let error of registerError.non_field_errors">{{ error }}</p>
   </div>
 
   <div class="form-action-wrap">

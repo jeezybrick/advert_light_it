@@ -16,6 +16,7 @@ export class UserAreaComponent implements OnInit {
   constructor(public authService: AuthService) {
     this.isLoggedIn = authService.isLoggedIn();
     this.currentUser = authService.currentUser;
+    console.log(this.currentUser);
   }
 
   ngOnInit() {
@@ -23,6 +24,14 @@ export class UserAreaComponent implements OnInit {
 
   public logout() {
     this.authService.logout();
+  }
+
+  get userFullName() {
+
+    if (!this.currentUser.user.first_name && !this.currentUser.user.last_name) {
+      return 'No name user';
+    }
+    return `${ this.currentUser.user.first_name } ${ this.currentUser.user.last_name }`;
   }
 
 }

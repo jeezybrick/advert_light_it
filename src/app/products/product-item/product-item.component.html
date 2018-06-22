@@ -11,9 +11,14 @@
       {{product.theme}}
     </div>
 
-    <a [routerLink]="[ '/products' , product.pk]" class="preview-icon-wrap">
-      <img src="/assets/images/products/fa-eye.png" alt="More detail">
-    </a>
+    <div class="user-action-wrap">
+
+      <i class="fa fa-shopping-cart fa-2x" (click)="addProductToCart(product)"></i>
+
+      <a [routerLink]="[ '/products' , product.pk]" class="preview-icon-wrap">
+        <i class="fa fa-eye fa-2x"></i>
+      </a>
+    </div>
 
   </div>
 

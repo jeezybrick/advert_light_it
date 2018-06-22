@@ -1,8 +1,9 @@
 <div class="search-input-wrap">
-  <input type="text" (keyup)="search()" [(ngModel)]="searchText" placeholder="Try to find something"/>
-  <div class="search-input-dropdown">
 
-    <a class="product-link" *ngFor="let product of products$ | async"
+  <input type="text" (keyup)="search()" [(ngModel)]="searchText" placeholder="Try to find something"/>
+
+  <div class="search-input-dropdown">
+    <a class="product-link" *ngFor="let product of products"
        [routerLink]="[ '/products' , product.pk]" (click)="resetSearchResults()">
 
       <div class="image-product-preview">
@@ -13,7 +14,8 @@
 
     </a>
 
-    <!--<p *ngIf="products$ && !products$.length">No results :(</p>-->
+    <p *ngIf="!products.length && searchText.length && !isProductsLoading">No results :(</p>
 
   </div>
+
 </div>

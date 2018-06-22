@@ -1,20 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { finalize } from 'rxjs/internal/operators';
 
 import { Product } from '../../shared/models/product.model';
 import { ProductService } from '../../shared/services/product/product.service';
-
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-products-list',
   templateUrl: './products-list.component.html',
   styleUrls: ['./products-list.component.scss']
 })
-export class ProductsListComponent implements OnInit {
+export class ProductsListComponent implements OnInit, OnDestroy {
 
   public products: Product[] = [];
   public isProductsListInitialLoading = true;
   public isProductsListLoading = true;
+  private subscriptions: Subscription[] = [];
   private pagination = {
     limit: 20,
     offset: 0,
@@ -27,11 +28,18 @@ export class ProductsListComponent implements OnInit {
     this.getProductsList();
   }
 
+  public ngOnDestroy(): void {
+
+    this.subscriptions.forEach((subscription: Subscription) => {
+      subscription.unsubscribe();
+    });
+  }
+
   private getProductsList(): void {
 
     this.isProductsListLoading = true;
 
-     this.productService.getProductsList(this.pagination)
+     this.subscriptions.push(this.productService.getProductsList(this.pagination)
       .pipe(
         finalize(() => {
           this.isProductsListInitialLoading = false;
@@ -45,7 +53,7 @@ export class ProductsListComponent implements OnInit {
         },
         (error) => {
           console.log(error);
-        });
+        }));
   }
 
   public onScroll(event: Event): void {

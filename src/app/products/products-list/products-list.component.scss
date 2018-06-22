@@ -6,6 +6,11 @@
     flex: 1 0 500px;
     box-sizing: border-box;
     margin: 1rem .25em;
+
+    @media (max-width: 640px) {
+     flex: 1 0 300px;
+    }
+
   }
 
 }
