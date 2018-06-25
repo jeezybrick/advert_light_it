@@ -49,11 +49,10 @@ export class LoginFormComponent implements OnInit {
   public onSubmit(): void {
 
     this.isLoginProcess = true;
-    this.loginError = null;
+    this.loginError = new AuthError();
 
     this.authService.login(this.loginForm.value)
       .pipe(
-        first(),
         finalize(() => {
           this.isLoginProcess = false;
         }))

@@ -39,21 +39,22 @@ export class RegisterFormComponent implements OnInit {
   public onSubmit(): void {
 
     this.isRegisterProcess = true;
-        this.authService.register(this.registerForm.value)
-            .pipe(
-              first(),
-              finalize(() => {
-                this.isRegisterProcess = false;
-              }))
-            .subscribe(
-              (data) => {
-                    console.log(data);
-                    this.router.navigate([this.returnUrl]);
-                },
-              (error) => {
-                     console.log(error);
-                     this.registerError = error.error;
-                });
+    this.registerError = new AuthError();
+
+    this.authService.register(this.registerForm.value)
+      .pipe(
+        finalize(() => {
+          this.isRegisterProcess = false;
+        }))
+      .subscribe(
+        (data) => {
+          console.log(data);
+          this.router.navigate([this.returnUrl]);
+        },
+        (error) => {
+          console.log(error);
+          this.registerError = error.error;
+        });
   }
 
   get f() {
