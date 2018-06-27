@@ -27,11 +27,11 @@
              class="form-control"
              formControlName="email"
              placeholder="Email"
-             [class.is-invalid]="(f.get('email').hasError('required') && f.get('email').touched) || registerError.email">
+             [class.is-invalid]="(f.get('email').hasError('required') && f.get('email').touched) || registerError?.email">
     </label>
 
      <div class="invalid-feedback" *ngIf="registerError">
-      <p *ngFor="let error of registerError.email">{{ error }}</p>
+      <p *ngFor="let error of registerError?.email">{{ error }}</p>
     </div>
 
     <div class="invalid-feedback" *ngIf="f.get('email').hasError('required') && f.get('email').touched">
@@ -47,7 +47,7 @@
              class="form-control"
              formControlName="password1"
              placeholder="Password"
-             [class.is-invalid]="((f.get('password1').hasError('required') || f.get('password1').hasError('minlength')) && f.get('password1').touched) || registerError.password1">
+             [class.is-invalid]="isInvalid('password1')">
     </label>
 
     <div class="invalid-feedback" *ngIf="registerError">
@@ -71,11 +71,11 @@
              class="form-control"
              formControlName="password2"
              placeholder="Confirm password"
-             [class.is-invalid]="((f.get('password2').hasError('required') || f.get('password2').hasError('minlength') )&& f.get('password2').touched) || registerError.password2">
+             [class.is-invalid]="((f.get('password2').hasError('required') || f.get('password2').hasError('minlength') )&& f.get('password2').touched) || registerError?.password2">
     </label>
 
     <div class="invalid-feedback" *ngIf="registerError">
-      <p *ngFor="let error of registerError.password2">{{ error }}</p>
+      <p *ngFor="let error of registerError?.password2">{{ error }}</p>
     </div>
 
     <div class="invalid-feedback" *ngIf="f.get('password2').hasError('required') && f.get('password2').touched">
@@ -93,7 +93,7 @@
   </div>
 
   <div class="invalid-feedback" *ngIf="registerError">
-    <p *ngFor="let error of registerError.non_field_errors">{{ error }}</p>
+    <p *ngFor="let error of registerError?.non_field_errors">{{ error }}</p>
   </div>
 
   <div class="form-action-wrap">
