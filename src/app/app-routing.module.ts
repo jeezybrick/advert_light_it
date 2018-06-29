@@ -3,11 +3,11 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AuthComponent } from './auth/auth.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { LoginFormComponent } from './login-form/login-form.component';
-import { RegisterFormComponent } from './register-form/register-form.component';
-import { ShellComponent } from './shell/shell.component';
 import { NoAuthGuard } from './shared/auth/no-auth-guard.service';
 import { AuthGuard } from './shared/auth/auth-guard.service';
+import { ShellComponent } from './ui/shell/shell.component';
+import { LoginFormComponent } from './auth/login-form/login-form.component';
+import { RegisterFormComponent } from './auth/register-form/register-form.component';
 
 const routes: Routes = [
 

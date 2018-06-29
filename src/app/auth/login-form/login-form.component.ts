@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { finalize, first } from 'rxjs/internal/operators';
-import { AuthService } from '../shared/auth/auth.service';
-import { AuthError } from '../shared/models/auth-error.model';
+
+import { AuthError } from '../../shared/models/auth-error.model';
+import { AuthService } from '../../shared/auth/auth.service';
 
 @Component({
   selector: 'app-login-form',
@@ -53,6 +54,7 @@ export class LoginFormComponent implements OnInit {
 
     this.authService.login(this.loginForm.value)
       .pipe(
+        first(),
         finalize(() => {
           this.isLoginProcess = false;
         }))

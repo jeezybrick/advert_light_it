@@ -1,6 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { Router, Event, NavigationStart, NavigationEnd, NavigationError, NavigationCancel } from '@angular/router';
 import { routerTransition } from './app-router.animations';
+import { takeUntil } from 'rxjs/internal/operators';
+import { ReplaySubject } from 'rxjs';
+import { untilComponentDestroyed } from 'ng2-rx-componentdestroyed';
 
 @Component({
   selector: 'app-root',
@@ -8,14 +11,25 @@ import { routerTransition } from './app-router.animations';
   animations: [ routerTransition ],
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnDestroy{
 
   public loading = true;
+  private destroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
 
   constructor(private router: Router) {
-    router.events.subscribe((routerEvent: Event) => {
+    router.events
+      .pipe(
+       // untilComponentDestroyed(this),
+        takeUntil(this.destroyed$)
+      )
+      .subscribe((routerEvent: Event) => {
       this.checkRouterEvent(routerEvent);
     });
+  }
+
+   ngOnDestroy() {
+    this.destroyed$.next(true);
+    this.destroyed$.complete();
   }
 
   public checkRouterEvent(routerEvent: Event): void {
@@ -30,7 +44,7 @@ export class AppComponent {
     }
   }
 
-  public getState(outlet) {
+  public getState(outlet): string {
     return outlet.activatedRouteData.state;
   }
 }

@@ -1,8 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
-import { Product } from '../shared/models/product.model';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/internal/operators';
-import { ProductService } from '../shared/services/product/product.service';
+
+import { ProductService } from '../../shared/services/product/product.service';
+import { Product } from '../../shared/models/product.model';
+
 
 @Component({
   selector: 'app-search-input',

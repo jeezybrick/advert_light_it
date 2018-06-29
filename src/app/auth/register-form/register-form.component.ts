@@ -1,17 +1,17 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { finalize } from 'rxjs/internal/operators';
-import { AuthService } from '../shared/auth/auth.service';
-import { AuthError } from '../shared/models/auth-error.model';
-import { UserService } from '../shared/services/user/user.service';
+import { finalize, first } from 'rxjs/internal/operators';
+
+import { AuthError } from '../../shared/models/auth-error.model';
+import { UserService } from '../../shared/services/user/user.service';
+import { AuthService } from '../../shared/auth/auth.service';
 
 
 @Component({
   selector: 'app-register-form',
   templateUrl: './register-form.component.html',
-  styleUrls: ['./register-form.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./register-form.component.scss']
 })
 export class RegisterFormComponent implements OnInit {
 
@@ -44,6 +44,7 @@ export class RegisterFormComponent implements OnInit {
 
     this.authService.register(this.registerForm.value)
       .pipe(
+        first(),
         finalize(() => {
           this.isRegisterProcess = false;
         }))

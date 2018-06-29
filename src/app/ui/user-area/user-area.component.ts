@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { AuthService } from '../shared/auth/auth.service';
-import { AuthUser } from '../shared/models/created-user.model';
+
+import { AuthUser } from '../../shared/models/created-user.model';
+import { AuthService } from '../../shared/auth/auth.service';
 
 @Component({
   selector: 'app-user-area',
@@ -16,7 +17,6 @@ export class UserAreaComponent implements OnInit {
   constructor(public authService: AuthService) {
     this.isLoggedIn = authService.isLoggedIn();
     this.currentUser = authService.currentUser;
-    console.log(this.currentUser);
   }
 
   ngOnInit() {
