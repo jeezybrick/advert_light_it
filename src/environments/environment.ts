@@ -3,7 +3,8 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  light_it_api_url: 'http://light-it-04.tk/api'
 };
 
 /*

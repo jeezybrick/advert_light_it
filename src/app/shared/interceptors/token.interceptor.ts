@@ -5,9 +5,10 @@ import {
   HttpEvent,
   HttpInterceptor
 } from '@angular/common/http';
-
-import { AuthService } from './auth.service';
 import { Observable } from 'rxjs';
+
+import { AuthService } from '../services/auth/auth.service';
+
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
@@ -16,7 +17,7 @@ export class TokenInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    const currentUser = JSON.parse(this.auth.getToken());
 
     if (currentUser && currentUser.token) {
       request = request.clone({

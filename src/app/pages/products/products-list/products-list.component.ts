@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { finalize } from 'rxjs/internal/operators';
-
-import { Product } from '../../shared/models/product.model';
-import { ProductService } from '../../shared/services/product/product.service';
 import { Subscription } from 'rxjs';
+
+import { Product } from '../../../shared/models/product.model';
+import { ProductService } from '../../../shared/services/product/product.service';
 
 @Component({
   selector: 'app-products-list',

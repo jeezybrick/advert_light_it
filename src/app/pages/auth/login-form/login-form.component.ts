@@ -3,8 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { finalize, first } from 'rxjs/internal/operators';
 
-import { AuthError } from '../../shared/models/auth-error.model';
-import { AuthService } from '../../shared/auth/auth.service';
+import { AuthError } from '../../../shared/models/auth-error.model';
+import { AuthService } from '../../../shared/services/auth/auth.service';
 
 @Component({
   selector: 'app-login-form',
@@ -65,5 +65,9 @@ export class LoginFormComponent implements OnInit {
         (error) => {
           this.loginError = error.error;
         });
+  }
+
+  public isInvalid(fieldName: string) {
+    return ((this.f.get(fieldName).invalid) && this.f.get(fieldName).touched) || this.loginError[fieldName];
   }
 }

@@ -7,7 +7,7 @@
              class="form-control"
              formControlName="username"
              placeholder="Username"
-             [class.is-invalid]="(f.get('email').hasError('required') && f.get('email').touched) || registerError?.username">
+             [class.is-invalid]="isInvalid('username')">
     </label>
 
     <div class="invalid-feedback" *ngIf="registerError">
@@ -27,7 +27,7 @@
              class="form-control"
              formControlName="email"
              placeholder="Email"
-             [class.is-invalid]="(f.get('email').hasError('required') && f.get('email').touched) || registerError?.email">
+             [class.is-invalid]="isInvalid('email')">
     </label>
 
      <div class="invalid-feedback" *ngIf="registerError">
@@ -71,7 +71,7 @@
              class="form-control"
              formControlName="password2"
              placeholder="Confirm password"
-             [class.is-invalid]="((f.get('password2').hasError('required') || f.get('password2').hasError('minlength') )&& f.get('password2').touched) || registerError?.password2">
+             [class.is-invalid]="isInvalid('password2')">
     </label>
 
     <div class="invalid-feedback" *ngIf="registerError">

@@ -7,7 +7,7 @@
              class="form-control"
              formControlName="email"
              placeholder="Email"
-             [class.is-invalid]="(f.get('email').hasError('required') && f.get('email').touched) || loginError.email">
+             [class.is-invalid]="isInvalid('email')">
     </label>
 
     <div class="invalid-feedback" *ngIf="loginError">
@@ -28,7 +28,7 @@
              class="form-control"
              formControlName="password"
              placeholder="Password"
-             [class.is-invalid]="(f.get('password').hasError('required') && f.get('password').touched) || loginError.password">
+             [class.is-invalid]="isInvalid('password')">
     </label>
 
     <div class="invalid-feedback" *ngIf="loginError">

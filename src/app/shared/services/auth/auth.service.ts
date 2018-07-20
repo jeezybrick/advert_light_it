@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
-
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient, HttpRequest } from '@angular/common/http';
-import { User } from '../models/user.model';
-import { UserService } from '../services/user/user.service';
 import { map } from 'rxjs/internal/operators';
-import { AuthUser } from '../models/created-user.model';
 
-const base_url = 'http://light-it-04.tk/api';
+import { UserService } from '../user/user.service';
+import { AuthUser } from '../../models/created-user.model';
+import { User } from '../../models/user.model';
+import { environment } from '../../../../environments/environment';
+
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +20,7 @@ export class AuthService {
 
   constructor(private userService: UserService,
               private http: HttpClient) {
-    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    this.currentUser = JSON.parse(this.getToken());
   }
 
   public register(user: User): Observable<any> {
@@ -36,17 +36,22 @@ export class AuthService {
 
   public login(user): Observable<any> {
 
-    return this.http.post<any>(`${base_url}/login/`, user)
+    return this.http.post<any>(`${environment.light_it_api_url}/login/`, user)
       .pipe(
-        map((userData: AuthUser) => {
-          return this.setUserDataToLocalStorage(userData);
+        map((parameters: { userData: AuthUser }) => {
+          return this.setUserDataToLocalStorage(parameters);
         })
       );
   }
 
   private setUserDataToLocalStorage(userData): AuthUser {
 
+    console.log(userData);
+
     if (userData && userData.token) {
+
+      console.log(userData);
+
       this.currentUser = userData;
       localStorage.setItem('currentUser', JSON.stringify(userData));
       this.isLoginSubject.next(true);
@@ -66,7 +71,7 @@ export class AuthService {
   }
 
   public hasToken(): boolean {
-    return !!localStorage.getItem('currentUser');
+    return !!this.getToken();
   }
 
   public getToken(): string {

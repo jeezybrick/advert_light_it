@@ -1,13 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AuthComponent } from './auth/auth.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { NoAuthGuard } from './shared/auth/no-auth-guard.service';
-import { AuthGuard } from './shared/auth/auth-guard.service';
-import { ShellComponent } from './ui/shell/shell.component';
-import { LoginFormComponent } from './auth/login-form/login-form.component';
-import { RegisterFormComponent } from './auth/register-form/register-form.component';
+import { ShellComponent } from './shared/components/ui/shell/shell.component';
+import { NoAuthGuard } from './shared/guards/no-auth-guard.service';
+import { AuthComponent } from './pages/auth/auth.component';
+import { RegisterFormComponent } from './pages/auth/register-form/register-form.component';
+import { LoginFormComponent } from './pages/auth/login-form/login-form.component';
+import { AuthGuard } from './shared/guards/auth-guard.service';
+import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
+
 
 const routes: Routes = [
 
@@ -19,7 +20,7 @@ const routes: Routes = [
       {path: '', redirectTo: 'products', pathMatch: 'full'},
       {
         path: 'products',
-        loadChildren: './products/products.module#ProductsModule'
+        loadChildren: './pages/products/products.module#ProductsModule'
       }
     ]
   },

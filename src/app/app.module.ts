@@ -6,23 +6,22 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { AuthComponent } from './auth/auth.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-
+import { AuthComponent } from './pages/auth/auth.component';
+import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
+import { HeaderComponent } from './shared/components/ui/header/header.component';
+import { FooterComponent } from './shared/components/ui/footer/footer.component';
+import { SidebarComponent } from './shared/components/ui/sidebar/sidebar.component';
+import { LoginFormComponent } from './pages/auth/login-form/login-form.component';
+import { RegisterFormComponent } from './pages/auth/register-form/register-form.component';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { UserAreaComponent } from './shared/components/ui/user-area/user-area.component';
+import { ShellComponent } from './shared/components/ui/shell/shell.component';
+import { ProgressBarComponent } from './shared/components/ui/progress-bar/progress-bar.component';
+import { CartComponent } from './pages/cart/cart.component';
 import { SharedModule } from './shared/shared.module';
-import { TokenInterceptor } from './shared/auth/token.interceptor';
-import { ProfileComponent } from './profile/profile.component';
-import { CartComponent } from './cart/cart.component';
-import { ErrorInterceptor } from './shared/auth/error.interceptor';
-import { HeaderComponent } from './ui/header/header.component';
-import { FooterComponent } from './ui/footer/footer.component';
-import { SidebarComponent } from './ui/sidebar/sidebar.component';
-import { LoginFormComponent } from './auth/login-form/login-form.component';
-import { RegisterFormComponent } from './auth/register-form/register-form.component';
-import { SearchInputComponent } from './ui/search-input/search-input.component';
-import { UserAreaComponent } from './ui/user-area/user-area.component';
-import { ShellComponent } from './ui/shell/shell.component';
-import { ProgressBarComponent } from './ui/progress-bar/progress-bar.component';
+import { SearchInputComponent } from './shared/components/ui/search-input/search-input.component';
+import { TokenInterceptor } from './shared/interceptors/token.interceptor';
+import { ErrorInterceptor } from './shared/interceptors/error.interceptor';
 
 
 @NgModule({

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { AuthUser } from '../../shared/models/created-user.model';
-import { AuthService } from '../../shared/auth/auth.service';
+import { AuthUser } from '../../../models/created-user.model';
+import { AuthService } from '../../../services/auth/auth.service';
 
 @Component({
   selector: 'app-user-area',

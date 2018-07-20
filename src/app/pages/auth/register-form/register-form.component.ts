@@ -3,9 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { finalize, first } from 'rxjs/internal/operators';
 
-import { AuthError } from '../../shared/models/auth-error.model';
-import { UserService } from '../../shared/services/user/user.service';
-import { AuthService } from '../../shared/auth/auth.service';
+import { AuthError } from '../../../shared/models/auth-error.model';
+import { UserService } from '../../../shared/services/user/user.service';
+import { AuthService } from '../../../shared/services/auth/auth.service';
 
 
 @Component({

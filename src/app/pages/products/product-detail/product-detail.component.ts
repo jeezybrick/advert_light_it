@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-
-import { Product } from '../../shared/models/product.model';
-import { Image } from '../../shared/models/image.model';
 import { Subscription } from 'rxjs';
+
+import { Product } from '../../../shared/models/product.model';
+import { Image } from '../../../shared/models/image.model';
 
 @Component({
   selector: 'app-product-detail',
@@ -59,6 +59,14 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
 
     this.indexOfCurrentImage++;
     this.slideImage = this.product.images[this.indexOfCurrentImage];
+  }
+
+  get userFullName() {
+
+    if (!this.product.owner.first_name && !this.product.owner.last_name) {
+      return 'No name user';
+    }
+    return `${ this.product.owner.first_name } ${ this.product.owner.last_name }`;
   }
 
 }

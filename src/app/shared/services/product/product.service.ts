@@ -2,9 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+import { environment } from '../../../../environments/environment';
 import { Product } from '../../models/product.model';
-
-const url = 'http://light-it-04.tk/api';
 
 
 @Injectable({
@@ -16,16 +15,16 @@ export class ProductService {
 
   public getProductsList(params = {}): Observable<any> {
 
-    const settingQueryParams = ProductService.setQueryParams(params);
+    const settingQueryParams = this.setQueryParams(params);
 
-    return this.http.get<Product[]>(`${url}/adverts/`, {params: settingQueryParams});
+    return this.http.get<Product[]>(`${environment.light_it_api_url}/adverts/`, {params: settingQueryParams});
   }
 
   public getProductDetail(productId): Observable<any> {
-    return this.http.get<Product>(`${url}/adverts/${productId}/`);
+    return this.http.get<Product>(`${environment.light_it_api_url}/adverts/${productId}/`);
   }
 
-  private static setQueryParams(params): HttpParams {
+  private setQueryParams(params): HttpParams {
 
     const localParams = new HttpParams({
       fromObject: params
@@ -42,7 +41,7 @@ export class ProductService {
       count: 1
     };
 
-    return this.http.post<any>(`${url}/add_to_basket/`, data);
+    return this.http.post<any>(`${environment.light_it_api_url}/add_to_basket/`, data);
   }
 
 

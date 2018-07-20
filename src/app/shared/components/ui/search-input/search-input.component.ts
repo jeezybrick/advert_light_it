@@ -2,8 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/internal/operators';
 
-import { ProductService } from '../../shared/services/product/product.service';
-import { Product } from '../../shared/models/product.model';
+import { Product } from '../../../models/product.model';
+import { ProductService } from '../../../services/product/product.service';
 
 
 @Component({
